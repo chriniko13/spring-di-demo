@@ -20,6 +20,13 @@ public class EmployeeDaoInMemoryImpl implements EmployeeDao {
     private static final int END_INCLUSIVE = 10;
 
     static {
+        initialize();
+    }
+
+    private static void initialize() {
+
+        EMPLOYEES_DB.clear();
+        ID_GENERATOR_SEQUENCER.set(0);
 
         final Random random = new Random();
 
@@ -36,7 +43,6 @@ public class EmployeeDaoInMemoryImpl implements EmployeeDao {
 
             EMPLOYEES_DB.put(employee.getId(), employee);
         });
-
     }
 
     public void update(List<Employee> employees) {
