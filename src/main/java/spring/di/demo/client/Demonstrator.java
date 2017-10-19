@@ -15,10 +15,8 @@ public class Demonstrator {
 
     enum ContextConfig {
         XML_BASED_CONFIG,
-        JAVA_BASED_CONFIGURATION,
-        ANNOTATION_BASED_CONFIGURATION
+        JAVA_BASED_CONFIGURATION
     }
-
 
     private static ApplicationContext getContext(ContextConfig contextConfig) {
 
@@ -30,20 +28,19 @@ public class Demonstrator {
             case JAVA_BASED_CONFIGURATION: //DONE
                 return new AnnotationConfigApplicationContext(BeanConfiguration.class);
 
-            case ANNOTATION_BASED_CONFIGURATION: //TODO
-                return new ClassPathXmlApplicationContext("config-beans-annotation.xml");
-
             default:
                 throw new IllegalStateException();
         }
 
     }
 
-
     public static void main(String[] args) {
 
-        ApplicationContext context = getContext(ContextConfig.JAVA_BASED_CONFIGURATION);
+        final ApplicationContext context = getContext(ContextConfig.XML_BASED_CONFIG);
+        firstExample(context);
+    }
 
+    private static void firstExample(ApplicationContext context) {
         EmployeeService employeeService = context.getBean(EmployeeService.class);
 
         //findAll demonstration...
@@ -124,7 +121,6 @@ public class Demonstrator {
         employeeService.update(employees10);
         List<Employee> employees11 = employeeService.findAll();
         employees11.forEach(System.out::println);
-
     }
 
 }
