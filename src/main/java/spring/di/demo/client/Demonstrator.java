@@ -79,15 +79,15 @@ public class Demonstrator {
         employees4.forEach(System.out::println);
 
 
-        //find(String,String,String,boolean) demonstration...
+        //find(String,String,String) demonstration...
         List<Employee> employees5 = employeeService.find("Firstname 1", "Initials 1", "Surname 1");
-        System.out.println("\n--- find(String,String,String,boolean) ---");
+        System.out.println("\n--- find(String,String,String) ---");
         employees5.forEach(System.out::println);
 
 
-        //find(String,String,String,boolean) demonstration...
+        //find(String,String,String) demonstration...
         List<Employee> employees6 = employeeService.find("Firstname 123", "Initials 1", "Surname 1");
-        System.out.println("\n--- find(String,String,String,boolean) ---");
+        System.out.println("\n--- find(String,String,String) ---");
         employees6.forEach(System.out::println);
 
 
