@@ -12,6 +12,7 @@ import spring.di.demo.service.EmployeeService;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:config-beans.xml"})
@@ -134,14 +135,26 @@ public class FullServiceIntegrationTest {
     public void update_list_employees_Test() throws Exception {
 
         //given...
-
+        List<Employee> employees = LongStream
+                .rangeClosed(1, 2)
+                .boxed()
+                .map(idx -> Employee.builder()
+                        .id(idx)
+                        .firstname("Firstname " + idx)
+                        .initials("Initials " + idx)
+                        .surname("Surname " + idx)
+                        .fired(true)
+                        .build())
+                .collect(Collectors.toList());
 
 
         //when...
-
+        employeeService.update(employees);
 
 
         //then...
+        List<Employee> result = employeeService.find(Arrays.asList(1L, 2L));
 
+        Assert.assertEquals(result, employees);
     }
 }

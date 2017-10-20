@@ -1,5 +1,5 @@
 
 
 0) jacoco plugin. [DONE]
-1) unit tests. [TODO]
-2) integration tests. [TODO]
+1) unit tests. [DONE]
+2) integration tests. [DONE]
