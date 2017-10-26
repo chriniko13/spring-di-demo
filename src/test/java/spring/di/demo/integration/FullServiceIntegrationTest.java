@@ -6,9 +6,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import spring.di.demo.dao.EmployeeDaoInMemoryImpl;
 import spring.di.demo.domain.Employee;
 import spring.di.demo.service.EmployeeService;
 
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,8 +23,16 @@ public class FullServiceIntegrationTest {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private EmployeeDaoInMemoryImpl employeeDaoInMemory;
+
     @Test
     public void findAll_Test() throws Exception {
+
+        //given...
+        Method initialize = employeeDaoInMemory.getClass().getDeclaredMethod("initialize");
+        initialize.setAccessible(true);
+        initialize.invoke(employeeDaoInMemory);
 
         //when...
         List<Employee> all = employeeService.findAll();
